@@ -1,66 +1,63 @@
-export const ML = "ml";
 export const L = "l";
-export const referenceVolumeUnit = L;
-export const volumeUnits = {
-  [ML]: { label: "ml", referenceValue: 1000 },
-  [L]: { label: "l", referenceValue: 1 },
-}
+export const ML = "ml";
 
-export const MG = "mg";
+export const Volume = {
+  label: "volume",
+  referenceUnit: L,
+  units: {
+    [L]: { label: "l", referenceValue: 1 },
+    [ML]: { label: "ml", referenceValue: 1000 },
+  },
+};
+
 export const G = "g";
-export const referenceWeightUnit = G;
-export const weightUnits = {
-  [MG]: { label: "mg", referenceValue: 1000 },
-  [G]: { label: "g", referenceValue: 1 },
-}
+export const MG = "mg";
 
-export class Volume {
-  constructor(unit, value) {
+export const Weight = {
+  label: "weight",
+  referenceUnit: G,
+  units: {
+    [G]: { label: "g", referenceValue: 1 },
+    [MG]: { label: "mg", referenceValue: 1000 },
+  },
+};
+
+export class AbstractValue {
+  constructor(type, unit, value) {
+    this.typeUnits = type.units;
+    this.typeLabel = type.label;
     this.unit = unit;
     this.value = value;
 
-    if (!Volume.validate(unit)) {
-      throw `Invalid volume unit '${unit}'`;
+    if (!this.validate(unit)) {
+      throw `Invalid ${this.typeLabel} unit '${unit}'`;
     }
   }
 
   convertTo(unit) {
-    if (!Volume.validate(unit)) {
-      throw `Invalid volume unit '${unit}'`;
+    if (!this.validate(unit)) {
+      throw `Invalid ${this.typeLabel} unit '${unit}'`;
     }
 
-    const inputUnit = volumeUnits[this.unit];
-    const outputUnit = volumeUnits[unit];
+    const inputUnit = this.typeUnits[this.unit];
+    const outputUnit = this.typeUnits[unit];
     return (this.value / inputUnit.referenceValue) * outputUnit.referenceValue;
   }
 
-  static validate(unit) {
-    return typeof volumeUnits[unit] !== "undefined";
+  validate(unit) {
+    return typeof this.typeUnits[unit] !== "undefined";
   }
 }
 
-export class Weight {
+export class VolumeValue extends AbstractValue {
   constructor(unit, value) {
-    this.unit = unit;
-    this.value = value;
-
-    if (!Weight.validate(unit)) {
-      throw `Invalid weight unit '${unit}'`;
-    }
+    super(Volume, unit, value);
   }
+}
 
-  convertTo(unit) {
-    if (!Weight.validate(unit)) {
-      throw `Invalid weight unit '${unit}'`;
-    }
-
-    const inputUnit = weightUnits[this.unit];
-    const outputUnit = weightUnits[unit];
-    return (this.value / inputUnit.referenceValue) * outputUnit.referenceValue;
-  }
-
-  static validate(unit) {
-    return typeof weightUnits[unit] !== "undefined";
+export class WeightValue extends AbstractValue {
+  constructor(unit, value) {
+    super(Weight, unit, value);
   }
 }
 
