@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ConversionList from './ConversionList';
 //import { ML, L, VolumeValue } from '../utils/units';
 
 class ConversionForm extends Component {
@@ -8,9 +9,10 @@ class ConversionForm extends Component {
     this.state = {
       inputUnit: 'ml',
       outputUnit: 'ml',
-      inputQuantity: '300',
-      outputQuantity: '100',
-      inputPrice: '2.99',
+      inputQuantity: '',
+      outputQuantity: '',
+      inputPrice: '',
+      conversions: [],
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,24 +21,42 @@ class ConversionForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.saveConversion();
   }
 
   handleInput(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  formatPrice(value) {
-    let price = parseFloat(value);
-    price = price.toFixed(2);
-    return price.toLocaleString('en-US', { minimumFractionDigits: 2 });
+  calculateOutputPrice(inputPrice, inputQuantity, outputQuantity) {
+    return inputPrice / inputQuantity * outputQuantity;
   }
 
-  getOutputPrice() {
-    const inputPrice = parseFloat(this.state.inputPrice);
-    const inputQuantity = parseFloat(this.state.inputQuantity);
-    const outputQuantity = parseFloat(this.state.outputQuantity);
-    const outputPrice = inputPrice / inputQuantity * outputQuantity;
-    return this.formatPrice(outputPrice);
+  saveConversion() {
+    this.setState((state) => {
+      const inputPrice = parseFloat(state.inputPrice);
+      const inputQuantity = parseFloat(state.inputQuantity);
+      const outputQuantity = parseFloat(state.outputQuantity);
+
+      if (Number.isNaN(inputPrice) ||
+          Number.isNaN(inputQuantity) ||
+          Number.isNaN(outputQuantity)) {
+        return {};
+      }
+
+      const outputPrice =
+        this.calculateOutputPrice(inputPrice, inputQuantity, outputQuantity);
+
+      state.conversions.push({
+        inputPrice: inputPrice,
+        inputQuantity: inputQuantity,
+        inputUnit: state.inputUnit,
+        outputPrice: outputPrice,
+        outputQuantity: outputQuantity,
+        outputUnit: state.outputUnit,
+      });
+      return {conversions: state.conversions};
+    });
   }
 
   render() {
@@ -81,16 +101,15 @@ class ConversionForm extends Component {
             <span> {this.state.outputUnit}</span>
           </label>
         </div>
-
         <br/>
         <br/>
 
-        <div>
-          $ {this.formatPrice(this.state.inputPrice)} for {this.state.inputQuantity}{this.state.inputUnit}
-          <br/>
-          <br/>
-          <b>is $ {this.getOutputPrice()} for {this.state.outputQuantity}{this.state.inputUnit}</b>
-        </div>
+        <input type="submit" value="Calculate" />
+        <br/>
+        <br/>
+
+        <span>Conversions:</span>
+        <ConversionList conversions={this.state.conversions}/>
       </form>
     );
   }
