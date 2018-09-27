@@ -34,7 +34,7 @@ export class AbstractValue {
     }
   }
 
-  convertTo(unit) {
+  convertValue(unit) {
     if (!this.validate(unit)) {
       throw Error(`Invalid ${this.typeLabel} unit '${unit}'`);
     }
@@ -53,11 +53,19 @@ export class VolumeValue extends AbstractValue {
   constructor(unit, value) {
     super(Volume, unit, value);
   }
+
+  convertTo(unit) {
+    return new VolumeValue(unit, this.convertValue(unit));
+  }
 }
 
 export class WeightValue extends AbstractValue {
   constructor(unit, value) {
     super(Weight, unit, value);
+  }
+
+  convertTo(unit) {
+    return new WeightValue(unit, this.convertValue(unit));
   }
 }
 

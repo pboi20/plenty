@@ -2,13 +2,13 @@ import { ML, L, VolumeValue, MG, G, WeightValue } from './units';
 
 it('does volume conversions', () => {
   let v = new VolumeValue(ML, 300);
-  expect(v.convertTo(L)).toEqual(0.3);
+  expect(v.convertTo(L).value).toEqual(0.3);
 
   v = new VolumeValue(L, 2.5);
-  expect(v.convertTo(ML)).toEqual(2500);
+  expect(v.convertTo(ML).value).toEqual(2500);
 
   v = new VolumeValue(L, 18);
-  expect(v.convertTo(L)).toEqual(18);
+  expect(v.convertTo(L).value).toEqual(18);
 });
 
 it('rejects invalid volume unit', () => {
@@ -24,13 +24,13 @@ it('rejects invalid volume unit', () => {
 
 it('does weight conversions', () => {
   let w = new WeightValue(MG, 300);
-  expect(w.convertTo(G)).toEqual(0.3);
+  expect(w.convertTo(G).value).toEqual(0.3);
 
   w = new WeightValue(G, 2.5);
-  expect(w.convertTo(MG)).toEqual(2500);
+  expect(w.convertTo(MG).value).toEqual(2500);
 
   w = new WeightValue(G, 18);
-  expect(w.convertTo(G)).toEqual(18);
+  expect(w.convertTo(G).value).toEqual(18);
 });
 
 it('rejects invalid weight unit', () => {
