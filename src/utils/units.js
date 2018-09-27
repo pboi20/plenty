@@ -30,13 +30,13 @@ export class AbstractValue {
     this.value = value;
 
     if (!this.validate(unit)) {
-      throw `Invalid ${this.typeLabel} unit '${unit}'`;
+      throw Error(`Invalid ${this.typeLabel} unit '${unit}'`);
     }
   }
 
   convertTo(unit) {
     if (!this.validate(unit)) {
-      throw `Invalid ${this.typeLabel} unit '${unit}'`;
+      throw Error(`Invalid ${this.typeLabel} unit '${unit}'`);
     }
 
     const inputUnit = this.typeUnits[this.unit];
