@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { stringToNumber } from '../utils/number';
 
 class NumberInput extends Component {
   /**
@@ -16,11 +17,7 @@ class NumberInput extends Component {
   handleInput(e) {
     const { value } = e.target;
     this.setState({ value });
-
-    let floatValue = parseFloat(value);
-    if (Number.isNaN(floatValue)) {
-      floatValue = null;
-    }
+    const floatValue = stringToNumber(value);
     this.props.onChange(floatValue);
   }
 
