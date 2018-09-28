@@ -1,4 +1,4 @@
-import { ML, L, VolumeValue, MG, G, WeightValue } from './units';
+import { ML, L, VolumeValue, MG, G, WeightValue } from './conversion';
 
 it('does volume conversions', () => {
   let v = new VolumeValue(ML, 300);
