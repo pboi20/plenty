@@ -23,17 +23,15 @@ class NumberInput extends Component {
 
   render() {
     return (
-      <div>
-        <label>
-          <span>{this.props.label}: </span>
-          <input
-            type="number"
-            name={this.props.name}
-            value={this.state.value}
-            onChange={this.handleInput}
-          />
-        </label>
-      </div>
+      <label>
+        <span>{this.props.label}: </span>
+        <input
+          type="number"
+          name={this.props.name}
+          value={this.state.value}
+          onChange={this.handleInput}
+        />
+      </label>
     );
   }
 }
