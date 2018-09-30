@@ -27,6 +27,18 @@ class ConversionForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+    const { inputPrice, inputQuantity, outputQuantity } = this.state;
+    const hasPrice = inputPrice !== null;
+    const hasQuantity = inputQuantity !== null && outputQuantity !== null;
+
+    if (hasPrice && hasQuantity) {
+      this.convertPriceForQuantity();
+    } else if (hasQuantity) {
+      this.convertQuantity();
+    } else {
+      console.log("Error: Need at least 2 quantities to convert");
+    }
   }
 
   handleInputPrice(value) {
@@ -52,7 +64,12 @@ class ConversionForm extends Component {
   calculateOutputPrice(inputPrice, inputQuantity, outputQuantity) {
   }
 
-  saveConversion() {
+  convertPriceForQuantity() {
+    console.log("convertPriceForQuantity");
+  }
+
+  convertQuantity() {
+    console.log("convertQuantity");
   }
 
   render() {
