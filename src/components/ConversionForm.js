@@ -1,114 +1,100 @@
 import React, { Component } from 'react';
+import NumberInput from './NumberInput';
+import QuantityInput from './QuantityInput';
 import ConversionList from './ConversionList';
-//import { ML, L, VolumeValue } from '../utils/units';
+import { ML } from '../utils/conversion';
 
 class ConversionForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      inputUnit: 'ml',
-      outputUnit: 'ml',
-      inputQuantity: '',
-      outputQuantity: '',
-      inputPrice: '',
+      inputUnit: ML,
+      outputUnit: ML,
+      inputQuantity: null,
+      outputQuantity: null,
+      inputPrice: null,
       conversions: [],
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInput = this.handleInput.bind(this);
+    this.handleInputPrice = this.handleInputPrice.bind(this);
+    this.handleInputQuantity = this.handleInputQuantity.bind(this);
+    this.handleInputUnit = this.handleInputUnit.bind(this);
+    this.handleOutputQuantity = this.handleOutputQuantity.bind(this);
+    this.handleOutputUnit = this.handleOutputUnit.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.saveConversion();
+    console.log("handleSubmit");
   }
 
-  handleInput(e) {
-    this.setState({ [e.target.name]: e.target.value })
+  handleInputPrice(value) {
+    this.setState({ inputPrice: value });
+    console.log("handleInputPrice, value=", value);
+  }
+
+  handleInputQuantity(value) {
+    this.setState({ inputQuantity: value });
+    console.log("handleInputQuantity, value=", value);
+  }
+
+  handleInputUnit(value) {
+    this.setState({ inputUnit: value });
+    console.log("handleInputUnit, value=", value);
+  }
+
+  handleOutputQuantity(value) {
+    this.setState({ outputQuantity: value });
+    console.log("handleOutputQuantity, value=", value);
+  }
+
+  handleOutputUnit(value) {
+    this.setState({ outputUnit: value });
+    console.log("handleOutputUnit, value=", value);
   }
 
   calculateOutputPrice(inputPrice, inputQuantity, outputQuantity) {
-    return inputPrice / inputQuantity * outputQuantity;
   }
 
   saveConversion() {
-    this.setState((state) => {
-      const inputPrice = parseFloat(state.inputPrice);
-      const inputQuantity = parseFloat(state.inputQuantity);
-      const outputQuantity = parseFloat(state.outputQuantity);
-
-      if (Number.isNaN(inputPrice) ||
-          Number.isNaN(inputQuantity) ||
-          Number.isNaN(outputQuantity)) {
-        return {};
-      }
-
-      const outputPrice =
-        this.calculateOutputPrice(inputPrice, inputQuantity, outputQuantity);
-
-      state.conversions.push({
-        inputPrice: inputPrice,
-        inputQuantity: inputQuantity,
-        inputUnit: state.inputUnit,
-        outputPrice: outputPrice,
-        outputQuantity: outputQuantity,
-        outputUnit: state.outputUnit,
-      });
-      return {conversions: state.conversions};
-    });
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
-          <label>
-            <span>Product Price: </span>
-            <input
-              type="number"
-              name="inputPrice"
-              value={this.state.inputPrice}
-              onChange={this.handleInput}
-            />
-          </label>
+          <NumberInput
+            label="Product Price"
+            name="inputPrice"
+            onChange={this.handleInputPrice}
+          />
         </div>
-        <br/>
-
         <div>
-          <label>
-            <span>Product Quantity: </span>
-            <input
-              type="number"
-              name="inputQuantity"
-              value={this.state.inputQuantity}
-              onChange={this.handleInput}
-            />
-            <span> {this.state.inputUnit}</span>
-          </label>
+          <QuantityInput
+            label="Product Quantity"
+            name="inputQuantity"
+            unit={this.state.inputUnit}
+            onChange={this.handleInputQuantity}
+            onChangeUnit={this.handleInputUnit}
+          />
         </div>
-        <br/>
-
         <div>
-          <label>
-            <span>Base Quantity: </span>
-            <input
-              type="number"
-              name="outputQuantity"
-              value={this.state.outputQuantity}
-              onChange={this.handleInput}
-            />
-            <span> {this.state.outputUnit}</span>
-          </label>
+          <QuantityInput
+            label="Base Quantity"
+            name="outputQuantity"
+            unit={this.state.outputUnit}
+            onChange={this.handleOutputQuantity}
+            onChangeUnit={this.handleOutputUnit}
+          />
         </div>
         <br/>
+
+        <input type="submit" value="Convert" />
+        <br/>
         <br/>
 
-        <input type="submit" value="Calculate" />
-        <br/>
-        <br/>
-
-        <span>Conversions:</span>
         <ConversionList conversions={this.state.conversions}/>
       </form>
     );
