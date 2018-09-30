@@ -27,32 +27,26 @@ class ConversionForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("handleSubmit");
   }
 
   handleInputPrice(value) {
     this.setState({ inputPrice: value });
-    console.log("handleInputPrice, value=", value);
   }
 
   handleInputQuantity(value) {
     this.setState({ inputQuantity: value });
-    console.log("handleInputQuantity, value=", value);
   }
 
   handleInputUnit(value) {
     this.setState({ inputUnit: value });
-    console.log("handleInputUnit, value=", value);
   }
 
   handleOutputQuantity(value) {
     this.setState({ outputQuantity: value });
-    console.log("handleOutputQuantity, value=", value);
   }
 
   handleOutputUnit(value) {
     this.setState({ outputUnit: value });
-    console.log("handleOutputUnit, value=", value);
   }
 
   calculateOutputPrice(inputPrice, inputQuantity, outputQuantity) {
