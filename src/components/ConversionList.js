@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { formatPrice } from '../utils/price';
+import { formatPrice } from '../utils/number';
 
 class ConversionList extends Component {
   render() {
@@ -7,15 +7,18 @@ class ConversionList extends Component {
 
     if (conversions.length) {
       return (
-          <ul>
-            {conversions.map((item, index) =>
-              <li key={index}>
-                $ {formatPrice(item.inputPrice)} for {item.inputQuantity}{item.inputUnit} =
-                <b> $ {formatPrice(item.outputPrice)} </b>
-                for {item.outputQuantity}{item.outputUnit}
-              </li>
-            )}
-          </ul>
+          <div>
+            <h2>conversions</h2>
+            <ul>
+              {conversions.map((item, index) =>
+                <li key={index}>
+                  $ {formatPrice(item.inputPrice)} for {item.inputQuantity}{item.inputUnit} =
+                  <b> $ {formatPrice(item.outputPrice)} </b>
+                  for {item.outputQuantity}{item.outputUnit}
+                </li>
+              )}
+            </ul>
+          </div>
       );
     }
     return "";
