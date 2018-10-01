@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NumberInput from './NumberInput';
 import QuantityInput from './QuantityInput';
 import ConversionList from './ConversionList';
-import { ML } from '../utils/conversion';
+import { ML, VolumeValue } from '../utils/conversion';
 
 class ConversionForm extends Component {
   constructor(props) {
@@ -30,14 +30,13 @@ class ConversionForm extends Component {
 
     const { inputPrice, inputQuantity, outputQuantity } = this.state;
     const hasPrice = inputPrice !== null;
-    const hasQuantity = inputQuantity !== null && outputQuantity !== null;
+    const hasInputQuantity = inputQuantity !== null;
+    const hasQuantities = inputQuantity !== null && outputQuantity !== null;
 
-    if (hasPrice && hasQuantity) {
+    if (hasPrice && hasQuantities) {
       this.convertPriceForQuantity();
-    } else if (hasQuantity) {
+    } else if (hasInputQuantity) {
       this.convertQuantity();
-    } else {
-      console.log("Error: Need at least 2 quantities to convert");
     }
   }
 
@@ -69,7 +68,19 @@ class ConversionForm extends Component {
   }
 
   convertQuantity() {
-    console.log("convertQuantity");
+    const { inputQuantity, inputUnit, outputUnit } = this.state;
+    const inputValue = new VolumeValue(inputUnit, inputQuantity);
+    const outputQuantity = inputValue.convertValue(outputUnit);
+    this.addConversion({ inputQuantity, inputUnit, outputQuantity, outputUnit });
+  }
+
+  addConversion(data) {
+    this.setState(previousState => {
+      let { conversions } = previousState;
+      conversions.push(data);
+      return { conversions };
+    });
+    console.log("addConversion =", JSON.stringify(data))
   }
 
   render() {
@@ -89,6 +100,7 @@ class ConversionForm extends Component {
             unit={this.state.inputUnit}
             onChange={this.handleInputQuantity}
             onChangeUnit={this.handleInputUnit}
+            required
           />
         </div>
         <div>
@@ -98,6 +110,7 @@ class ConversionForm extends Component {
             unit={this.state.outputUnit}
             onChange={this.handleOutputQuantity}
             onChangeUnit={this.handleOutputUnit}
+            required={this.state.inputPrice !== null}
           />
         </div>
         <br/>
