@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NumberInput from './NumberInput';
-import QuantityInput from './QuantityInput';
+import UnitSelect from './UnitSelect';
 import ConversionList from './ConversionList';
 import { ML, VolumeValue } from '../utils/conversion';
 
@@ -98,23 +98,29 @@ class ConversionForm extends Component {
           />
         </div>
         <div>
-          <QuantityInput
+          <NumberInput
             label="Product Quantity"
             name="inputQuantity"
-            unit={this.state.inputUnit}
             onChange={this.handleInputQuantity}
-            onChangeUnit={this.handleInputUnit}
             required
+          />
+          <UnitSelect
+            name="inputUnit"
+            unit={this.state.inputUnit}
+            onChange={this.handleInputUnit}
           />
         </div>
         <div>
-          <QuantityInput
+          <NumberInput
             label="Base Quantity"
             name="outputQuantity"
-            unit={this.state.outputUnit}
             onChange={this.handleOutputQuantity}
-            onChangeUnit={this.handleOutputUnit}
             required={this.state.inputPrice !== null}
+          />
+          <UnitSelect
+            name="outputUnit"
+            unit={this.state.outputUnit}
+            onChange={this.handleOutputUnit}
           />
         </div>
         <br/>
