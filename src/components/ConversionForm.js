@@ -60,11 +60,16 @@ class ConversionForm extends Component {
     this.setState({ outputUnit: value });
   }
 
-  calculateOutputPrice(inputPrice, inputQuantity, outputQuantity) {
-  }
-
   convertPriceForQuantity() {
-    console.log("convertPriceForQuantity");
+    const {
+      inputPrice, inputQuantity, inputUnit, outputQuantity, outputUnit
+    } = this.state;
+    const inputValue = new VolumeValue(inputUnit, inputQuantity);
+    const conversionQuantity = inputValue.convertValue(outputUnit);
+    const outputPrice = inputPrice / conversionQuantity * outputQuantity;
+    this.addConversion({
+      inputPrice, inputQuantity, inputUnit, outputPrice, outputQuantity, outputUnit
+    });
   }
 
   convertQuantity() {
@@ -80,7 +85,6 @@ class ConversionForm extends Component {
       conversions.push(data);
       return { conversions };
     });
-    console.log("addConversion =", JSON.stringify(data))
   }
 
   render() {

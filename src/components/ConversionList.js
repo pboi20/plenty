@@ -16,7 +16,8 @@ class ConversionListItem extends Component {
     } else {
       return (
         <li>
-          {item.inputQuantity}{item.inputUnit} = {item.outputQuantity}{item.outputUnit}
+          {item.inputQuantity}{item.inputUnit} =
+          <b> {item.outputQuantity}{item.outputUnit}</b>
         </li>
       );
     }
