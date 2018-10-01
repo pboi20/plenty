@@ -106,7 +106,7 @@ class ConversionForm extends Component {
           />
           <UnitSelect
             name="inputUnit"
-            unit={this.state.inputUnit}
+            value={this.state.inputUnit}
             onChange={this.handleInputUnit}
           />
         </div>
@@ -119,7 +119,7 @@ class ConversionForm extends Component {
           />
           <UnitSelect
             name="outputUnit"
-            unit={this.state.outputUnit}
+            value={this.state.outputUnit}
             onChange={this.handleOutputUnit}
           />
         </div>
