@@ -7,6 +7,7 @@ class NumberInput extends Component {
    *   name: String
    *   label: String
    *   onChange: Function
+   *   required: Boolean
    */
   constructor(props) {
     super(props);
@@ -30,6 +31,7 @@ class NumberInput extends Component {
           name={this.props.name}
           value={this.state.value}
           onChange={this.handleInput}
+          required={this.props.required}
         />
       </label>
     );

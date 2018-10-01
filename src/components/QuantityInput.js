@@ -15,6 +15,7 @@ class QuantityInput extends Component {
    *   unit: String
    *   onChange: Function
    *   onChangeUnit: Function
+   *   required: Boolean
    */
   constructor(props) {
     super(props);
@@ -33,6 +34,7 @@ class QuantityInput extends Component {
           label={this.props.label}
           name={this.props.name}
           onChange={this.props.onChange}
+          required={this.props.required}
         />
         <select
           name={`${this.props.name}-unit`}
