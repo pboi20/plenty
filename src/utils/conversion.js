@@ -1,14 +1,23 @@
 export const L = "l";
 export const ML = "ml";
+export const TSP = "tsp";
+export const TBSP = "tbsp";
 
 export const Volume = {
   label: "volume",
   referenceUnit: L,
+  unitSequence: [ML, L, TSP, TBSP],
   units: {
     [L]: { label: "l", referenceValue: 1 },
     [ML]: { label: "ml", referenceValue: 1000 },
+    [TSP]: { label: "tsp (US)", referenceValue: 202.88 },
+    [TBSP]: { label: "tbsp (US)", referenceValue: 67.63 },
   },
 };
+
+export const VolumeChoices = Volume.unitSequence.map(item => (
+  [item, Volume.units[item].label]
+));
 
 export const G = "g";
 export const MG = "mg";
@@ -16,11 +25,16 @@ export const MG = "mg";
 export const Weight = {
   label: "weight",
   referenceUnit: G,
+  unitSequence: [MG, G],
   units: {
     [G]: { label: "g", referenceValue: 1 },
     [MG]: { label: "mg", referenceValue: 1000 },
   },
 };
+
+export const WeightChoices = Weight.unitSequence.map(item => (
+  [item, Weight.units[item].label]
+));
 
 export class AbstractValue {
   constructor(type, unit, value) {
