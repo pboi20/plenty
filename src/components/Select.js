@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import { ML, L, Volume } from '../utils/conversion';
 
-const unitList = [
-  { code: ML, label: Volume.units[ML].label },
-  { code: L, label: Volume.units[L].label },
-];
-
-class UnitSelect extends Component {
+class Select extends Component {
   /**
    * props
    *   name: String
    *   value: String
+   *   choices: Array
    *   onChange: Function
    */
   constructor(props) {
@@ -30,9 +25,9 @@ class UnitSelect extends Component {
         value={this.props.value}
         onChange={this.handleChange}
       >
-        {unitList.map(unit =>
-          <option key={unit.code} value={unit.code}>
-            {unit.label}
+        {this.props.choices.map(choice =>
+          <option key={choice[0]} value={choice[0]}>
+            {choice[1]}
           </option>
         )}
       </select>
@@ -40,4 +35,4 @@ class UnitSelect extends Component {
   }
 }
 
-export default UnitSelect;
+export default Select;

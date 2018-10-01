@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import NumberInput from './NumberInput';
-import UnitSelect from './UnitSelect';
+import Select from './Select';
 import ConversionList from './ConversionList';
-import { ML, VolumeValue } from '../utils/conversion';
+import { ML, L, Volume, VolumeValue } from '../utils/conversion';
+
+const volumeChoices = [
+  [ML, Volume.units[ML].label],
+  [L, Volume.units[L].label],
+];
 
 class ConversionForm extends Component {
   constructor(props) {
@@ -104,9 +109,10 @@ class ConversionForm extends Component {
             onChange={this.handleInputQuantity}
             required
           />
-          <UnitSelect
+          <Select
             name="inputUnit"
             value={this.state.inputUnit}
+            choices={volumeChoices}
             onChange={this.handleInputUnit}
           />
         </div>
@@ -117,9 +123,10 @@ class ConversionForm extends Component {
             onChange={this.handleOutputQuantity}
             required={this.state.inputPrice !== null}
           />
-          <UnitSelect
+          <Select
             name="outputUnit"
             value={this.state.outputUnit}
+            choices={volumeChoices}
             onChange={this.handleOutputUnit}
           />
         </div>
