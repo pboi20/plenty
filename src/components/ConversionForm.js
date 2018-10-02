@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import NumberInput from './NumberInput';
 import Select from './Select';
 import ConversionList from './ConversionList';
-import {
-  ML, L, TSP, TBSP, MG, G, Volume, VolumeValue, Weight, WeightValue
-} from '../utils/conversion';
+import { ML, Volume, VolumeValue, Weight, WeightValue } from '../utils/conversion';
 
 const defaultUnit = ML;
 
-const volumeUnits = [ML, L, TSP, TBSP];
+const volumeUnits = Object.keys(Volume.units).sort();
 const volumeChoices = volumeUnits.map(item => [item, Volume.units[item].label]);
 
-const weightUnits = [MG, G];
+const weightUnits = Object.keys(Weight.units).sort();
 const weightChoices = weightUnits.map(item => [item, Weight.units[item].label]);
 
 class ConversionForm extends Component {
