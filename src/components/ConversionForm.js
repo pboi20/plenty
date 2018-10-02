@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import NumberInput from './NumberInput';
 import Select from './Select';
 import ConversionList from './ConversionList';
-import { ML, VolumeChoices, VolumeValue } from '../utils/conversion';
+import {
+  ML, L, TSP, TBSP, MG, G, Volume, VolumeValue, Weight, WeightValue
+} from '../utils/conversion';
+
+const volumeUnits = [ML, L, TSP, TBSP];
+const volumeChoices = volumeUnits.map(item => [item, Volume.units[item].label]);
+
+const weightUnits = [MG, G];
+const weightChoices = weightUnits.map(item => [item, Weight.units[item].label]);
 
 class ConversionForm extends Component {
   constructor(props) {
@@ -107,7 +115,7 @@ class ConversionForm extends Component {
           <Select
             name="inputUnit"
             value={this.state.inputUnit}
-            choices={VolumeChoices}
+            choices={volumeChoices}
             onChange={this.handleInputUnit}
           />
         </div>
@@ -121,7 +129,7 @@ class ConversionForm extends Component {
           <Select
             name="outputUnit"
             value={this.state.outputUnit}
-            choices={VolumeChoices}
+            choices={volumeChoices}
             onChange={this.handleOutputUnit}
           />
         </div>
