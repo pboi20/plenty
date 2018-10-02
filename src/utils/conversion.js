@@ -33,13 +33,13 @@ export class AbstractValue {
     this.unit = unit;
     this.value = value;
 
-    if (!this.validate(unit)) {
+    if (!this.validateUnit(unit)) {
       throw Error(`Invalid ${this.typeLabel} unit '${unit}'`);
     }
   }
 
   convertValue(unit) {
-    if (!this.validate(unit)) {
+    if (!this.validateUnit(unit)) {
       throw Error(`Invalid ${this.typeLabel} unit '${unit}'`);
     }
 
@@ -48,7 +48,7 @@ export class AbstractValue {
     return (this.value / inputUnit.referenceValue) * outputUnit.referenceValue;
   }
 
-  validate(unit) {
+  validateUnit(unit) {
     return typeof this.typeUnits[unit] !== "undefined";
   }
 }
