@@ -1,7 +1,13 @@
+export const CUP = "CUP";
+export const FLOZ = "floz";
+export const G = "g";
 export const L = "l";
+export const LB = "lb";
+export const MG = "mg";
 export const ML = "ml";
-export const TSP = "tsp";
+export const OZ = "oz";
 export const TBSP = "tbsp";
+export const TSP = "tsp";
 
 export const Volume = {
   label: "volume",
@@ -9,13 +15,12 @@ export const Volume = {
   units: {
     [L]: { label: "l", referenceValue: 1 },
     [ML]: { label: "ml", referenceValue: 1000 },
-    [TSP]: { label: "tsp (US)", referenceValue: 202.88 },
-    [TBSP]: { label: "tbsp (US)", referenceValue: 67.63 },
+    [TSP]: { label: "tsp (US)", referenceValue: 202.884 },
+    [TBSP]: { label: "tbsp (US)", referenceValue: 67.627 },
+    [CUP]: { label: "cup (US)", referenceValue: 4.1666 },
+    [FLOZ]: { label: "fl oz (US)", referenceValue: 33.814 },
   },
 };
-
-export const G = "g";
-export const MG = "mg";
 
 export const Weight = {
   label: "weight",
@@ -23,6 +28,8 @@ export const Weight = {
   units: {
     [G]: { label: "g", referenceValue: 1 },
     [MG]: { label: "mg", referenceValue: 1000 },
+    [OZ]: { label: "oz", referenceValue: 0.035 },
+    [LB]: { label: "lb", referenceValue: 0.002 },
   },
 };
 
@@ -71,21 +78,3 @@ export class WeightValue extends AbstractValue {
     return new WeightValue(unit, this.convertValue(unit));
   }
 }
-
-/*
-  TODO add other units
-
-  volume units
-    ml: Millilitre
-    l: Liter
-    tsp: Teaspoon
-    tbsp: Tablespoon
-    c: Cup
-    floz: Fluid Ounce
-
-  weight units
-    mg: Milligram
-    g: Gram
-    oz: Ounce
-    lb: Pound
-*/
