@@ -28,28 +28,27 @@ export const Weight = {
 
 export class AbstractValue {
   constructor(type, unit, value) {
-    this.typeUnits = type.units;
-    this.typeLabel = type.label;
+    this.type = type;
     this.unit = unit;
     this.value = value;
 
     if (!this.validateUnit(unit)) {
-      throw Error(`Invalid ${this.typeLabel} unit '${unit}'`);
+      throw Error(`Invalid ${this.type.label} unit '${unit}'`);
     }
   }
 
   convertValue(unit) {
     if (!this.validateUnit(unit)) {
-      throw Error(`Invalid ${this.typeLabel} unit '${unit}'`);
+      throw Error(`Invalid ${this.type.label} unit '${unit}'`);
     }
 
-    const inputUnit = this.typeUnits[this.unit];
-    const outputUnit = this.typeUnits[unit];
+    const inputUnit = this.type.units[this.unit];
+    const outputUnit = this.type.units[unit];
     return (this.value / inputUnit.referenceValue) * outputUnit.referenceValue;
   }
 
   validateUnit(unit) {
-    return typeof this.typeUnits[unit] !== "undefined";
+    return typeof this.type.units[unit] !== "undefined";
   }
 }
 
