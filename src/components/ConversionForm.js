@@ -6,6 +6,8 @@ import {
   ML, L, TSP, TBSP, MG, G, Volume, VolumeValue, Weight, WeightValue
 } from '../utils/conversion';
 
+const defaultUnit = ML;
+
 const volumeUnits = [ML, L, TSP, TBSP];
 const volumeChoices = volumeUnits.map(item => [item, Volume.units[item].label]);
 
@@ -17,8 +19,8 @@ class ConversionForm extends Component {
     super(props);
 
     this.state = {
-      inputUnit: ML,
-      outputUnit: ML,
+      inputUnit: defaultUnit,
+      outputUnit: defaultUnit,
       inputQuantity: null,
       outputQuantity: null,
       inputPrice: null,
