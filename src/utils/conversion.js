@@ -1,13 +1,9 @@
+export const L = "l";
+export const ML = "ml";
+export const TSP = "tsp";
+export const TBSP = "tbsp";
 export const CUP = "CUP";
 export const FLOZ = "floz";
-export const G = "g";
-export const L = "l";
-export const LB = "lb";
-export const MG = "mg";
-export const ML = "ml";
-export const OZ = "oz";
-export const TBSP = "tbsp";
-export const TSP = "tsp";
 
 export const Volume = {
   label: "volume",
@@ -22,6 +18,11 @@ export const Volume = {
   },
 };
 
+export const G = "g";
+export const MG = "mg";
+export const OZ = "oz";
+export const LB = "lb";
+
 export const Weight = {
   label: "weight",
   referenceUnit: G,
@@ -33,19 +34,32 @@ export const Weight = {
   },
 };
 
+export function typeHasUnit(type, unit) {
+  return typeof type.units[unit] !== "undefined";
+}
+
+export function getUnitType(unit) {
+  for (let type of [Volume, Weight]) {
+    if (typeHasUnit(type, unit)) {
+      return type;
+    }
+  }
+  return null;
+}
+
 export class AbstractValue {
   constructor(type, unit, value) {
     this.type = type;
     this.unit = unit;
     this.value = value;
 
-    if (!this.validateUnit(unit)) {
+    if (!typeHasUnit(type, unit)) {
       throw Error(`Invalid ${this.type.label} unit '${unit}'`);
     }
   }
 
   convertValue(unit) {
-    if (!this.validateUnit(unit)) {
+    if (!typeHasUnit(this.type, unit)) {
       throw Error(`Invalid ${this.type.label} unit '${unit}'`);
     }
 

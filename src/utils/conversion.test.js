@@ -1,4 +1,6 @@
-import { ML, L, VolumeValue, MG, G, WeightValue } from './conversion';
+import {
+  ML, L, Volume, VolumeValue, MG, G, Weight, WeightValue, getUnitType
+} from './conversion';
 
 it('does volume conversions', () => {
   let v = new VolumeValue(ML, 300);
@@ -42,4 +44,10 @@ it('rejects invalid weight unit', () => {
   expect(() => {
     const result = w.convertTo(L);
   }).toThrow(/^Invalid weight unit/);
+});
+
+it('can get type from unit', () => {
+  expect(getUnitType(L)).toEqual(Volume);
+  expect(getUnitType(G)).toEqual(Weight);
+  expect(getUnitType('ABC')).toEqual(null);
 });
