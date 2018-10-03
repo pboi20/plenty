@@ -2,23 +2,44 @@ import React, { Component } from 'react';
 import NumberInput from './NumberInput';
 import Select from './Select';
 import ConversionList from './ConversionList';
-import { ML, Volume, VolumeValue, Weight, WeightValue } from '../utils/conversion';
+import { ML, MG, Volume, VolumeValue, Weight, WeightValue } from '../utils/conversion';
 
-const defaultUnit = ML;
-
+const VOLUME = 'Volume';
 const volumeUnits = Object.keys(Volume.units).sort();
 const volumeChoices = volumeUnits.map(item => [item, Volume.units[item].label]);
 
+const WEIGHT = 'Weight';
 const weightUnits = Object.keys(Weight.units).sort();
 const weightChoices = weightUnits.map(item => [item, Weight.units[item].label]);
+
+const typeChoices = [
+  [VOLUME, VOLUME],
+  [WEIGHT, WEIGHT],
+];
+
+const typeUnitChoices = {
+  [VOLUME]: volumeChoices,
+  [WEIGHT]: weightChoices,
+};
+
+const typeValueClasses = {
+  [VOLUME]: VolumeValue,
+  [WEIGHT]: WeightValue,
+};
+
+const defaultUnits = {
+  [VOLUME]: ML,
+  [WEIGHT]: MG,
+};
 
 class ConversionForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      inputUnit: defaultUnit,
-      outputUnit: defaultUnit,
+      unitType: VOLUME,
+      inputUnit: defaultUnits[VOLUME],
+      outputUnit: defaultUnits[VOLUME],
       inputQuantity: null,
       outputQuantity: null,
       inputPrice: null,
@@ -31,6 +52,7 @@ class ConversionForm extends Component {
     this.handleInputUnit = this.handleInputUnit.bind(this);
     this.handleOutputQuantity = this.handleOutputQuantity.bind(this);
     this.handleOutputUnit = this.handleOutputUnit.bind(this);
+    this.handleInputUnitType = this.handleInputUnitType.bind(this);
   }
 
   handleSubmit(e) {
@@ -68,11 +90,20 @@ class ConversionForm extends Component {
     this.setState({ outputUnit: value });
   }
 
+  handleInputUnitType(value) {
+    this.setState({
+      unitType: value,
+      inputUnit: defaultUnits[value],
+      outputUnit: defaultUnits[value],
+    });
+  }
+
   convertPriceForQuantity() {
     const {
-      inputPrice, inputQuantity, inputUnit, outputQuantity, outputUnit
+      inputPrice, inputQuantity, inputUnit, outputQuantity, outputUnit, unitType
     } = this.state;
-    const inputValue = new VolumeValue(inputUnit, inputQuantity);
+    const inputValueClass = typeValueClasses[unitType];
+    const inputValue = new inputValueClass(inputUnit, inputQuantity);
     const conversionQuantity = inputValue.convertValue(outputUnit);
     const outputPrice = inputPrice / conversionQuantity * outputQuantity;
     this.addConversion({
@@ -105,6 +136,21 @@ class ConversionForm extends Component {
             onChange={this.handleInputPrice}
           />
         </div>
+        <br />
+
+        <div>
+          <label>
+            <span>Quantity Type: </span>
+            <Select
+              name="unitType"
+              value={this.state.unitType}
+              choices={typeChoices}
+              onChange={this.handleInputUnitType}
+            />
+          </label>
+        </div>
+        <br />
+
         <div>
           <NumberInput
             label="Product Quantity"
@@ -115,7 +161,7 @@ class ConversionForm extends Component {
           <Select
             name="inputUnit"
             value={this.state.inputUnit}
-            choices={volumeChoices}
+            choices={typeUnitChoices[this.state.unitType]}
             onChange={this.handleInputUnit}
           />
         </div>
@@ -129,7 +175,7 @@ class ConversionForm extends Component {
           <Select
             name="outputUnit"
             value={this.state.outputUnit}
-            choices={volumeChoices}
+            choices={typeUnitChoices[this.state.unitType]}
             onChange={this.handleOutputUnit}
           />
         </div>
