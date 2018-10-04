@@ -1,0 +1,12 @@
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.App-header {
+  border: 1px solid blue;
+}
+
+.App-main {
+  border: 1px solid red;
+}

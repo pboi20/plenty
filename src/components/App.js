@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ConversionForm from './ConversionForm';
 
+import './App.css';
+
 class App extends Component {
   render() {
     return (
@@ -9,7 +11,9 @@ class App extends Component {
           <h1 className="App-title">Plenty</h1>
         </header>
 
-        <ConversionForm />
+        <div className="App-main">
+          <ConversionForm />
+        </div>
       </div>
     );
   }
