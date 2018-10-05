@@ -1,5 +1,7 @@
 .Select {
+  height: 2rem;
+  padding: 0;
+  padding-left: 2px;
   border: none;
   background-color: white;
-  height: 2em;
 }

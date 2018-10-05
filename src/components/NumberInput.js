@@ -10,6 +10,7 @@ class NumberInput extends Component {
    *   label: String
    *   onChange: Function
    *   required: Boolean
+   *   extraClass: String
    */
   constructor(props) {
     super(props);
@@ -25,10 +26,15 @@ class NumberInput extends Component {
   }
 
   render() {
+    const className = [
+      'NumberInput',
+      this.props.extraClass || '',
+    ].join(' ');
+
     return (
       <input
         type="number"
-        className="NumberInput"
+        className={className}
         id={this.props.name}
         name={this.props.name}
         value={this.state.value}

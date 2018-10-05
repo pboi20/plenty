@@ -1,4 +1,7 @@
 .NumberInput {
+  height: 2rem;
+  padding: 0;
+  padding-left: 0.5rem;
   border: none;
-  height: 2em;
+  background-color: white;
 }
