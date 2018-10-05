@@ -7,11 +7,17 @@ class FormField extends Component {
    * props
    *   name: String
    *   label: String
+   *   multi: Boolean
    */
 
   render() {
+    const className = [
+      'FormField',
+      this.props.multi ? 'FormField--multi' : ''
+    ].join(' ');
+
     return (
-      <div className="FormField">
+      <div className={className}>
         <label className="FormField-label" htmlFor={this.props.name}>
           {this.props.label}
         </label>

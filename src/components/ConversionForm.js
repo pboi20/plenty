@@ -148,7 +148,7 @@ class ConversionForm extends Component {
           />
         </FormField>
 
-        <FormField label="Product Quantity" name="inputQuantity">
+        <FormField label="Product Quantity" name="inputQuantity" multi>
           <NumberInput
             name="inputQuantity"
             onChange={this.handleInputQuantity}
@@ -162,7 +162,7 @@ class ConversionForm extends Component {
           />
         </FormField>
 
-        <FormField label="Base Quantity" name="outputQuantity">
+        <FormField label="Base Quantity" name="outputQuantity" multi>
           <NumberInput
             name="outputQuantity"
             onChange={this.handleOutputQuantity}

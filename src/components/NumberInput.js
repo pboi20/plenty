@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { stringToNumber } from '../utils/number';
 
+import './NumberInput.css';
+
 class NumberInput extends Component {
   /**
    * props
