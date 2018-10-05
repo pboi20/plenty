@@ -8,11 +8,16 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Plenty</h1>
+          <div className="App-container">
+            <h1 className="App-title">Plenty</h1>
+            <span className="App-subtitle">Convert price per quantity</span>
+          </div>
         </header>
 
         <div className="App-main">
-          <ConversionForm />
+          <div className="App-container">
+            <ConversionForm />
+          </div>
         </div>
       </div>
     );

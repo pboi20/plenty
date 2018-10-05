@@ -1,12 +1,26 @@
-.App {
+.App-container {
   max-width: 800px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .App-header {
-  border: 1px solid blue;
+  padding: 1rem 0;
+  background-color: #5c6073;
+  color: white;
+}
+
+.App-title {
+  display: inline-block;
+  margin: 0;
+  font-size: 2em;
+  line-height: 1em;
+}
+
+.App-subtitle {
+  display: inline-block;
+  margin-left: 1rem;
 }
 
 .App-main {
-  border: 1px solid red;
 }
