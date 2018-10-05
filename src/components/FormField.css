@@ -1,0 +1,10 @@
+.FormField {
+  margin-bottom: 0.4rem;
+}
+
+.FormField-label {
+  display: block;
+  margin: 0;
+  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
+}
