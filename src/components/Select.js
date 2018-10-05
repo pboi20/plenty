@@ -21,6 +21,7 @@ class Select extends Component {
   render() {
     return (
       <select
+        className="Select"
         name={this.props.name}
         value={this.props.value}
         onChange={this.handleChange}

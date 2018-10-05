@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import FormField from './FormField';
 import NumberInput from './NumberInput';
 import Select from './Select';
 import ConversionList from './ConversionList';
 import { ML, MG, Volume, VolumeValue, Weight, WeightValue } from '../utils/conversion';
+
+import './ConversionForm.css';
 
 const VOLUME = 'Volume';
 const volumeUnits = Object.keys(Volume.units).sort();
@@ -128,32 +131,25 @@ class ConversionForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
+      <form className="ConversionForm" onSubmit={this.handleSubmit}>
+        <FormField label="Conversion" name="unitType">
+          <Select
+            name="unitType"
+            value={this.state.unitType}
+            choices={typeChoices}
+            onChange={this.handleInputUnitType}
+          />
+        </FormField>
+
+        <FormField label="Product Price" name="inputPrice">
           <NumberInput
-            label="Product Price"
             name="inputPrice"
             onChange={this.handleInputPrice}
           />
-        </div>
-        <br />
+        </FormField>
 
-        <div>
-          <label>
-            <span>Quantity Type: </span>
-            <Select
-              name="unitType"
-              value={this.state.unitType}
-              choices={typeChoices}
-              onChange={this.handleInputUnitType}
-            />
-          </label>
-        </div>
-        <br />
-
-        <div>
+        <FormField label="Product Quantity" name="inputQuantity">
           <NumberInput
-            label="Product Quantity"
             name="inputQuantity"
             onChange={this.handleInputQuantity}
             required
@@ -164,10 +160,10 @@ class ConversionForm extends Component {
             choices={typeUnitChoices[this.state.unitType]}
             onChange={this.handleInputUnit}
           />
-        </div>
-        <div>
+        </FormField>
+
+        <FormField label="Base Quantity" name="outputQuantity">
           <NumberInput
-            label="Base Quantity"
             name="outputQuantity"
             onChange={this.handleOutputQuantity}
             required={this.state.inputPrice !== null}
@@ -178,12 +174,10 @@ class ConversionForm extends Component {
             choices={typeUnitChoices[this.state.unitType]}
             onChange={this.handleOutputUnit}
           />
-        </div>
-        <br/>
+        </FormField>
+
 
         <input type="submit" value="Convert" />
-        <br/>
-        <br/>
 
         <ConversionList conversions={this.state.conversions}/>
       </form>

@@ -15,7 +15,7 @@ class App extends Component {
         </header>
 
         <div className="App-main">
-          <div className="App-container">
+          <div className="App-container App-container--narrow">
             <ConversionForm />
           </div>
         </div>

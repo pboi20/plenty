@@ -24,16 +24,15 @@ class NumberInput extends Component {
 
   render() {
     return (
-      <label>
-        <span>{this.props.label}: </span>
-        <input
-          type="number"
-          name={this.props.name}
-          value={this.state.value}
-          onChange={this.handleInput}
-          required={this.props.required}
-        />
-      </label>
+      <input
+        type="number"
+        className="NumberInput"
+        id={this.props.name}
+        name={this.props.name}
+        value={this.state.value}
+        onChange={this.handleInput}
+        required={this.props.required}
+      />
     );
   }
 }
