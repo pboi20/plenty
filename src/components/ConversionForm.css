@@ -4,3 +4,13 @@
   border: 1px solid #cecece;
   background-color: #e6e6e6;
 }
+
+.ConversionForm-inputUnitCol,
+.ConversionForm-outputUnitCol {
+  max-width: 40%;
+  margin-left: 1px;
+}
+
+.ConversionForm-actions {
+  padding-top: 1rem;
+}

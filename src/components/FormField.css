@@ -2,10 +2,6 @@
   margin-bottom: 0.4rem;
 }
 
-.FormField--multi > * {
-  margin-left: 1px;
-}
-
 .FormField-label {
   display: block;
   margin: 0;

@@ -6,6 +6,7 @@ import Button from './Button';
 import ConversionList from './ConversionList';
 import { ML, MG, Volume, VolumeValue, Weight, WeightValue } from '../utils/conversion';
 
+import './Flex.css';
 import './ConversionForm.css';
 
 const VOLUME = 'Volume';
@@ -134,55 +135,71 @@ class ConversionForm extends Component {
     return (
       <div>
         <form className="ConversionForm" onSubmit={this.handleSubmit}>
-          <FormField label="Conversion" name="unitType">
-            <Select
-              name="unitType"
-              value={this.state.unitType}
-              choices={typeChoices}
-              onChange={this.handleInputUnitType}
-              extraClass="width-100"
-            />
-          </FormField>
-        
-          <FormField label="Product Price" name="inputPrice">
-            <NumberInput
-              name="inputPrice"
-              onChange={this.handleInputPrice}
-              extraClass="width-100"
-            />
-          </FormField>
-        
-          <FormField label="Product Quantity" name="inputQuantity" multi>
-            <NumberInput
-              name="inputQuantity"
-              onChange={this.handleInputQuantity}
-              required
-              extraClass="width-100"
-            />
-            <Select
-              name="inputUnit"
-              value={this.state.inputUnit}
-              choices={typeUnitChoices[this.state.unitType]}
-              onChange={this.handleInputUnit}
-            />
-          </FormField>
-        
-          <FormField label="Base Quantity" name="outputQuantity" multi>
-            <NumberInput
-              name="outputQuantity"
-              onChange={this.handleOutputQuantity}
-              required={this.state.inputPrice !== null}
-              extraClass="width-100"
-            />
-            <Select
-              name="outputUnit"
-              value={this.state.outputUnit}
-              choices={typeUnitChoices[this.state.unitType]}
-              onChange={this.handleOutputUnit}
-            />
-          </FormField>
-        
-          <Button type="submit" value="Convert" />
+          <div className="Row">
+            <div className="Col">
+              <FormField label="Conversion" name="unitType">
+                <Select
+                  name="unitType"
+                  value={this.state.unitType}
+                  choices={typeChoices}
+                  onChange={this.handleInputUnitType}
+                />
+              </FormField>
+
+              <FormField label="Product Price" name="inputPrice">
+                <NumberInput
+                  name="inputPrice"
+                  onChange={this.handleInputPrice}
+                />
+              </FormField>
+            </div>
+
+            <div className="Col">
+              <FormField label="Product Quantity" name="inputQuantity">
+                <div className="Row">
+                  <div className="Col padding-0">
+                    <NumberInput
+                      name="inputQuantity"
+                      onChange={this.handleInputQuantity}
+                      required
+                    />
+                  </div>
+                  <div className="Col padding-0 ConversionForm-inputUnitCol">
+                    <Select
+                      name="inputUnit"
+                      value={this.state.inputUnit}
+                      choices={typeUnitChoices[this.state.unitType]}
+                      onChange={this.handleInputUnit}
+                    />
+                  </div>
+                </div>
+              </FormField>
+
+              <FormField label="Base Quantity" name="outputQuantity">
+                <div className="Row">
+                  <div className="Col padding-0">
+                    <NumberInput
+                      name="outputQuantity"
+                      onChange={this.handleOutputQuantity}
+                      required={this.state.inputPrice !== null}
+                    />
+                  </div>
+                  <div className="Col padding-0 ConversionForm-outputUnitCol">
+                    <Select
+                      name="outputUnit"
+                      value={this.state.outputUnit}
+                      choices={typeUnitChoices[this.state.unitType]}
+                      onChange={this.handleOutputUnit}
+                    />
+                  </div>
+                </div>
+              </FormField>
+            </div>
+          </div>
+
+          <div className="Row Row--end ConversionForm-actions">
+            <Button type="submit" value="Convert" />
+          </div>
         </form>
 
         <ConversionList conversions={this.state.conversions}/>
