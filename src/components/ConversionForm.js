@@ -140,6 +140,7 @@ class ConversionForm extends Component {
               value={this.state.unitType}
               choices={typeChoices}
               onChange={this.handleInputUnitType}
+              extraClass="width-100"
             />
           </FormField>
         
@@ -156,6 +157,7 @@ class ConversionForm extends Component {
               name="inputQuantity"
               onChange={this.handleInputQuantity}
               required
+              extraClass="width-100"
             />
             <Select
               name="inputUnit"
@@ -170,6 +172,7 @@ class ConversionForm extends Component {
               name="outputQuantity"
               onChange={this.handleOutputQuantity}
               required={this.state.inputPrice !== null}
+              extraClass="width-100"
             />
             <Select
               name="outputUnit"

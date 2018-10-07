@@ -9,6 +9,7 @@ class Select extends Component {
    *   value: String
    *   choices: Array
    *   onChange: Function
+   *   extraClass: String
    */
   constructor(props) {
     super(props);
@@ -21,9 +22,14 @@ class Select extends Component {
   }
 
   render() {
+    const className = [
+      'Select',
+      this.props.extraClass || '',
+    ].join(' ');
+
     return (
       <select
-        className="Select"
+        className={className}
         name={this.props.name}
         value={this.props.value}
         onChange={this.handleChange}
