@@ -135,7 +135,7 @@ class ConversionForm extends Component {
     return (
       <div>
         <form className="ConversionForm" onSubmit={this.handleSubmit}>
-          <div className="Row">
+          <div className="Row Row--small">
             <div className="Col">
               <FormField label="Conversion" name="unitType">
                 <Select

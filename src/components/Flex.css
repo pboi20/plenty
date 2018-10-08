@@ -12,16 +12,26 @@
   padding: 0 0.5rem;
 }
 
-.Col--grow {
-}
-
-.Col--shrink {
-}
-
 .Col:first-child {
-  padding-left: 0;
+  padding-left: 0 !important;
 }
 
 .Col:last-child {
-  padding-right: 0;
+  padding-right: 0 !important;
+}
+
+/* Responsive Row */
+.Row--small {
+  flex-direction: column;
+}
+.Row--small .Col {
+  padding: 0;
+}
+@media screen and (min-width: 360px) {
+  .Row--small {
+    flex-direction: row;
+  }
+  .Row--small .Col {
+    padding: 0 0.5rem;
+  }
 }
