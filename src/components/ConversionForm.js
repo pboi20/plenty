@@ -17,16 +17,19 @@ const WEIGHT = 'Weight';
 const weightUnits = Object.keys(Weight.units).sort();
 const weightChoices = weightUnits.map(item => [item, Weight.units[item].label]);
 
+// Conversion types
 const typeChoices = [
   [VOLUME, VOLUME],
   [WEIGHT, WEIGHT],
 ];
 
+// Unit choices for each conversion type
 const typeUnitChoices = {
   [VOLUME]: volumeChoices,
   [WEIGHT]: weightChoices,
 };
 
+// Value classes for each conversion type
 const typeValueClasses = {
   [VOLUME]: VolumeValue,
   [WEIGHT]: WeightValue,
