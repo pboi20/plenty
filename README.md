@@ -1,5 +1,11 @@
 # plenty
 
+
+<p align='center'>
+<img src='./screenshot.png' width='250' alt='Screenshot of the App'>
+</p>
+
+
 This is a simple price per quantity calculator, created to teach myself React and Jest.
 
 The project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
