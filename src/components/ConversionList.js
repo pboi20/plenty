@@ -17,7 +17,7 @@ class ConversionListItem extends Component {
       return (
         <li>
           {item.inputQuantity}{item.inputUnit} =
-          <b> {item.outputQuantity}{item.outputUnit}</b>
+          <b> {formatDecimal(item.outputQuantity)}{item.outputUnit}</b>
         </li>
       );
     }
