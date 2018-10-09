@@ -3,7 +3,6 @@ import FormField from './FormField';
 import NumberInput from './NumberInput';
 import Select from './Select';
 import Button from './Button';
-import ConversionList from './ConversionList';
 import { ML, MG, Volume, VolumeValue, Weight, WeightValue } from '../utils/conversion';
 
 import './Flex.css';
@@ -41,6 +40,10 @@ const defaultUnits = {
 };
 
 class ConversionForm extends Component {
+  /**
+   * props
+   *   onAddConversion: Function
+   */
   constructor(props) {
     super(props);
 
@@ -51,7 +54,6 @@ class ConversionForm extends Component {
       inputQuantity: null,
       outputQuantity: null,
       inputPrice: null,
-      conversions: [],
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -128,11 +130,7 @@ class ConversionForm extends Component {
   }
 
   addConversion(data) {
-    this.setState(previousState => {
-      let { conversions } = previousState;
-      conversions.push(data);
-      return { conversions };
-    });
+    this.props.onAddConversion(data);
   }
 
   render() {
@@ -205,8 +203,6 @@ class ConversionForm extends Component {
             <Button type="submit" value="Convert" />
           </div>
         </form>
-
-        <ConversionList conversions={this.state.conversions}/>
       </div>
     );
   }
