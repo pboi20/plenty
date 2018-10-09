@@ -117,8 +117,9 @@ class ConversionForm extends Component {
   }
 
   convertQuantity() {
-    const { inputQuantity, inputUnit, outputUnit } = this.state;
-    const inputValue = new VolumeValue(inputUnit, inputQuantity);
+    const { inputQuantity, inputUnit, outputUnit, unitType } = this.state;
+    const inputValueClass = typeValueClasses[unitType];
+    const inputValue = new inputValueClass(inputUnit, inputQuantity);
     const outputQuantity = inputValue.convertValue(outputUnit);
     this.addConversion({ inputQuantity, inputUnit, outputQuantity, outputUnit });
   }
