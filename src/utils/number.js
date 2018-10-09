@@ -1,6 +1,6 @@
-export function formatDecimal(value) {
-  let price = value.toFixed(2);
-  return price.toLocaleString('en-US', { minimumFractionDigits: 2 });
+export function formatDecimal(value, precision=2) {
+  let price = value.toFixed(precision);
+  return price.toLocaleString('en-US', { minimumFractionDigits: precision });
 }
 
 export function stringToNumber(value) {
