@@ -1,9 +1,9 @@
-import { formatPrice, stringToNumber } from './number';
+import { formatDecimal, stringToNumber } from './number';
 
-it('formats price values', () => {
-  expect(formatPrice(23.4567)).toEqual('23.46');
-  expect(formatPrice(-98.765)).toEqual('-98.77');
-  expect(formatPrice(123456789)).toEqual('123456789.00');
+it('formats decimal values', () => {
+  expect(formatDecimal(23.4567)).toEqual('23.46');
+  expect(formatDecimal(-98.765)).toEqual('-98.77');
+  expect(formatDecimal(123456789)).toEqual('123456789.00');
 });
 
 it('converts number strings to numbers', () => {

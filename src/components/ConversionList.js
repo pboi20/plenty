@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { formatPrice } from '../utils/number';
+import { formatDecimal } from '../utils/number';
 
 class ConversionListItem extends Component {
   render() {
@@ -8,8 +8,8 @@ class ConversionListItem extends Component {
     if (item.inputPrice && item.outputPrice) {
       return (
         <li>
-          $ {formatPrice(item.inputPrice)} for {item.inputQuantity}{item.inputUnit} =
-          <b> $ {formatPrice(item.outputPrice)} </b>
+          $ {formatDecimal(item.inputPrice)} for {item.inputQuantity}{item.inputUnit} =
+          <b> $ {formatDecimal(item.outputPrice)} </b>
           for {item.outputQuantity}{item.outputUnit}
         </li>
       );
