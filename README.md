@@ -36,3 +36,5 @@ Builds the app for production to the `build` folder.
 ### Disclaimer
 
 This is a work in progress :)
+
+[MIT License](https://github.com/pboi20/plenty/blob/master/LICENSE)
