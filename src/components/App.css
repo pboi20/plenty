@@ -1,3 +1,9 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .App-container {
   max-width: 800px;
   margin: 0 auto;
@@ -27,5 +33,15 @@
 }
 
 .App-main {
+  margin-bottom: auto;
   padding: 1.5rem 0;
+}
+
+.App-footer {
+  padding: 0.5rem 0;
+}
+
+.App-version {
+  color: #adadad;
+  text-align: right;
 }

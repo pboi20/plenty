@@ -39,6 +39,12 @@ class App extends Component {
             <ConversionList conversions={this.state.conversions} />
           </div>
         </div>
+
+        <div className="App-footer">
+          <div className="App-container App-container--narrow">
+            <div className="App-version">v.2018-10-09</div>
+          </div>
+        </div>
       </div>
     );
   }
