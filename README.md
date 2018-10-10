@@ -2,7 +2,7 @@
 
 
 <p align='center'>
-<img src='./screenshot.png' width='250' alt='Screenshot of the App'>
+<img src='./screenshot.png' width='180' alt='Screenshot of the App'>
 </p>
 
 
